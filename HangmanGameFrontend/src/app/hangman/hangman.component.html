@@ -1,0 +1,31 @@
+<body>
+<h1>Hangman!</h1>
+
+<div class="container-fluid">
+    <div class="well">
+    <div class="secretWord">
+        <ul class="list-inline">
+        <li *ngFor="let letter of secretWord" class="list-inline-item">
+            <div *ngIf="letter.chosen"><span>{{ letter.c }}</span></div>
+            <div *ngIf="!letter.chosen"><span>_</span></div>
+        </li>
+        </ul>
+        
+        <div class="letters">
+        <ul class="list-inline">
+            <li *ngFor="let letter of letters" class="list-inline-item">
+            <button class="btn btn-success letter-button"
+                    [disabled]="letter.chosen"
+                    (click)="try(letter.c)">{{letter.c}}</button>
+            </li>
+        </ul>
+        </div>
+        
+        <div *ngIf="status == 'WON'"><p><span>Well done!</span></p></div>
+        <div *ngIf="status == 'LOST'"><p><span>Sorry, please try again!</span></p></div>
+        <div *ngIf="status == 'ACTIVE'"><p><span>You have {{ guessesRemaining }} guesses remaining.</span></p></div>
+    </div>
+    </div>
+</div>
+<button (click)="newHangmanGame()" class="btn btn-primary btn-large">New Game</button>
+</body>
